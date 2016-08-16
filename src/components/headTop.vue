@@ -15,7 +15,6 @@
 <style>
   .head {
     background: #DADFE1;
-    padding: 20px;
     margin-bottom: 20px;
   }
 
@@ -24,6 +23,7 @@
     margin: auto;
     display: flex;
     justify-content: space-between;
+    padding: 20px;
   }
 
   .btn {

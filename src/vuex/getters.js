@@ -1,0 +1,2 @@
+export const getEvents = state => {
+};

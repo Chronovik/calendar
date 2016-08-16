@@ -1,9 +1,9 @@
 <template>
   <section class="calendar">
     <div class="calendar__head">
-      <button class="btn btn_small">Назад</button>
-      <span class="calendar__view-date">Август 2016</span>
-      <button class="btn btn_small">Вперёд</button>
+      <button class="btn btn_small" @click="prevMonth">Назад</button>
+      <span class="calendar__view-date">{{ currentMonthName }} {{ currentYear }}</span>
+      <button class="btn btn_small" @click="nextMonth">Вперёд</button>
       <span class="calendar__today">Сегодня</span>
     </div>
     <table class="calendar__table">
@@ -23,153 +23,9 @@
           <td>
             <div class="calendar__table-date">10</div>    
             <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
+          </td> 
         </tr>
-        <tr>
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-        </tr>
-        <tr>
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-        </tr>
-        <tr>
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-        </tr>
-        <tr>
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-          <td>
-            <div class="calendar__table-date">10</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
-          </td>       
-        </tr>
-      
+     
       </tbody>
     </table>
   </section>
@@ -249,5 +105,64 @@
 </style>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      maxMonth: 12,
+      currentDate: null,
+      todayDate: null,
+      currentMonthName: null,
+      currentYear: null,
+      monthsNames: [
+        'Январь',
+        'Февраль',
+        'Март',
+        'Апрель',
+        'Май',
+        'Июнь',
+        'Июль',
+        'Август',
+        'Сентябрь',
+        'Октябрь',
+        'Ноябрь',
+        'Декабрь',
+      ],
+    };
+  },
+  computed: {},
+  methods: {
+    setCurrentMonth(date) {
+      this.currentDate = date || new Date();
+      this.currentMonthName = this.getCurrentMonthName();
+      this.currentYear = this.getCurrentYear();
+    },
+    getCurrentDate() {
+      return this.currentDate;
+    },
+    getCurrentMonth() {
+      return this.currentDate.getMonth();
+    },
+    getCurrentMonthName() {
+      return this.monthsNames[this.getCurrentMonth()];
+    },
+    getCurrentYear() {
+      return this.currentDate.getFullYear();
+    },
+    nextMonth() {
+      let currMonth = this.getCurrentMonth();
+      this.setCurrentMonth(new Date(this.getCurrentYear(), ++currMonth));
+      console.log(this.getCurrentYear(), this.getCurrentMonth());
+    },
+    prevMonth() {
+      let currMonth = this.getCurrentMonth();
+      this.setCurrentMonth(new Date(this.getCurrentYear(), --currMonth));
+      console.log(this.getCurrentYear(), this.getCurrentMonth());
+    },
+  },
+  ready() {
+    this.setCurrentMonth();
+  },
+  vuex: {},
+};
+
 </script>
