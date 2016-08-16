@@ -19,9 +19,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>
-            <div class="calendar__table-date">10</div>    
+        <tr v-for="week in tableDates">
+          <td v-for="day in week">
+            <div class="calendar__table-date">{{ day.dayNumber }}</div>    
             <div class="calendar__table-note">Обосраться на паре</div>      
           </td> 
         </tr>
@@ -108,11 +108,11 @@
 export default {
   data() {
     return {
-      maxMonth: 12,
       currentDate: null,
       todayDate: null,
       currentMonthName: null,
       currentYear: null,
+      tableDates: [],
       monthsNames: [
         'Январь',
         'Февраль',
@@ -132,7 +132,8 @@ export default {
   computed: {},
   methods: {
     setCurrentMonth(date) {
-      this.currentDate = date || new Date();
+      const tempDate = new Date();
+      this.currentDate = date || new Date(tempDate.getFullYear(), tempDate.getMonth() + 1, 0);
       this.currentMonthName = this.getCurrentMonthName();
       this.currentYear = this.getCurrentYear();
     },
@@ -151,16 +152,41 @@ export default {
     nextMonth() {
       let currMonth = this.getCurrentMonth();
       this.setCurrentMonth(new Date(this.getCurrentYear(), ++currMonth));
-      console.log(this.getCurrentYear(), this.getCurrentMonth());
+      this.generateTable();
     },
     prevMonth() {
       let currMonth = this.getCurrentMonth();
       this.setCurrentMonth(new Date(this.getCurrentYear(), --currMonth));
-      console.log(this.getCurrentYear(), this.getCurrentMonth());
+      this.generateTable();
+    },
+    generateTable() {
+      const firstDay = new Date(this.getCurrentYear(), this.getCurrentMonth(), 1);
+      let dayCounter = 0;
+      let offset = 0;
+      this.$set('tableDates', []);
+
+      if (firstDay.getDay() !== 0) {
+        offset = firstDay.getDay() - 2;
+        // new Date(...,..., 0).getDay() - last day of month;
+        // set offset for loop, week should starts from begining
+        dayCounter -= offset;
+      }
+
+      for (let row = 0; row <= 4; row++) {
+        this.tableDates.push([]);
+        for (let col = 0; col <= 6; col++, dayCounter++) {
+          const fullDateOfDay = new Date(this.getCurrentYear(), this.getCurrentMonth(), dayCounter);
+          this.tableDates[row].push({
+            date: fullDateOfDay,
+            dayNumber: fullDateOfDay.getDate(),
+          });
+        }
+      }
     },
   },
   ready() {
     this.setCurrentMonth();
+    this.generateTable();
   },
   vuex: {},
 };
