@@ -3,17 +3,22 @@
     <head-top>
       <search></search>
     </head-top>
+    <main class="content">
+      <calendar></calendar>
+    </main>
   </div>
 </template>
 
 <script>
-import HeadTop from './components/HeadTop.vue';
+import HeadTop from './components/headTop.vue';
 import Search from './components/search.vue';
+import Calendar from './components/calendar.vue';
 
 export default {
   components: {
     HeadTop,
     Search,
+    Calendar,
   },
 };
 </script>
@@ -38,6 +43,12 @@ body {
 #app a {
   color: #42b983;
   text-decoration: none;
+}
+
+.content {
+  max-width: 960px;
+  margin: auto;
+  padding: 0 20px;
 }
 
 </style>

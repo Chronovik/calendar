@@ -16,6 +16,7 @@
   .head {
     background: #DADFE1;
     padding: 20px;
+    margin-bottom: 20px;
   }
 
   .head__inner {
@@ -47,6 +48,10 @@
 
   .head__buttons-wrap .btn {
     margin-right: 10px;
+  }
+
+  .btn_small {
+    font-size: 12px;
   }
 </style>
 
