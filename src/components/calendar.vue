@@ -4,7 +4,7 @@
       <button class="btn btn_small" @click="prevMonth">Назад</button>
       <span class="calendar__view-date">{{ currentMonthName }} {{ currentYear }}</span>
       <button class="btn btn_small" @click="nextMonth">Вперёд</button>
-      <span class="calendar__today">Сегодня</span>
+      <span class="btn btn_small" @click="setCurrentMonth(this.todayDate)">Сегодня</span>
     </div>
     <table class="calendar__table">
       <thead>
@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         <tr v-for="week in tableDates">
-          <td v-for="day in week">
+          <td v-for="day in week" :class="{ 'calendar__table-today': day.today}">
             <div class="calendar__table-date">{{ day.dayNumber }}</div>    
             <div class="calendar__table-note">Обосраться на паре</div>      
           </td> 
@@ -98,9 +98,13 @@
   display: inline-block;
   border-radius: 3px;
   border: 1px solid rgba(103, 128, 159, .6);
-  padding: 2px 6px;
   margin-left: 6px;
   color: rgba(103, 128, 159, .6);
+  cursor: pointer;
+}
+
+.calendar__table-today {
+  background: rgba(103, 128, 159, .2);
 }
 </style>
 
@@ -136,6 +140,7 @@ export default {
       this.currentDate = date || new Date(tempDate.getFullYear(), tempDate.getMonth() + 1, 0);
       this.currentMonthName = this.getCurrentMonthName();
       this.currentYear = this.getCurrentYear();
+      this.generateTable();
     },
     getCurrentDate() {
       return this.currentDate;
@@ -176,17 +181,39 @@ export default {
         this.tableDates.push([]);
         for (let col = 0; col <= 6; col++, dayCounter++) {
           const fullDateOfDay = new Date(this.getCurrentYear(), this.getCurrentMonth(), dayCounter);
+          const isToday = this.isEqualDates(fullDateOfDay, this.todayDate);
+          console.log(fullDateOfDay, this.todayDate);
           this.tableDates[row].push({
             date: fullDateOfDay,
             dayNumber: fullDateOfDay.getDate(),
+            today: isToday,
           });
         }
       }
     },
+    setTodayDate() {
+      this.todayDate = new Date();
+    },
+    isEqualDates(date1, date2) {
+      const date1Year = date1.getFullYear();
+      const date2Year = date2.getFullYear();
+      const date1Month = date1.getMonth();
+      const date2Month = date2.getMonth();
+      const date1Day = date1.getDate();
+      const date2Day = date2.getDate();
+
+      if (date1Year === date2Year &&
+        date1Month === date2Month &&
+        date1Day === date2Day) {
+        return true;
+      }
+
+      return false;
+    },
   },
   ready() {
+    this.setTodayDate();
     this.setCurrentMonth();
-    this.generateTable();
   },
   vuex: {},
 };
