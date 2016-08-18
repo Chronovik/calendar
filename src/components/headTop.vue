@@ -53,6 +53,18 @@
   .btn_small {
     font-size: 12px;
   }
+
+  .btn_red {
+    background: #D64541;
+  }
+
+  .btn_red:hover {
+    background-color: #EC644B;
+  }
+  
+  .btn_red:active {
+    background-color: #C0392B;
+  }
 </style>
 
 <script>

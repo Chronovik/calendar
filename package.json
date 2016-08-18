@@ -11,8 +11,12 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "air-datepicker": "^2.1.0",
     "babel-runtime": "^6.0.0",
+    "jquery.maskedinput": "^1.4.1",
     "vue": "^1.0.21",
+    "vue-mask": "^1.0.0",
+    "vuejs-date-picker": "^1.0.1",
     "vuex": "^1.0.0-rc.2"
   },
   "devDependencies": {

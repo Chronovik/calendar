@@ -20,12 +20,11 @@
       </thead>
       <tbody>
         <tr v-for="week in tableDates">
-          <td v-for="day in week" :class="{ 'calendar__table-today': day.today}">
+          <td v-for="day in week" :class="{ 'calendar__table-today': day.today}"  @click="selectDay(e, day)">
             <div class="calendar__table-date">{{ day.dayNumber }}</div>    
             <div class="calendar__table-note">Обосраться на паре</div>      
           </td> 
-        </tr>
-     
+        </tr>     
       </tbody>
     </table>
   </section>
@@ -109,6 +108,8 @@
 </style>
 
 <script>
+import { showModal, setDateModal } from '../vuex/actions';
+
 export default {
   data() {
     return {
@@ -182,7 +183,6 @@ export default {
         for (let col = 0; col <= 6; col++, dayCounter++) {
           const fullDateOfDay = new Date(this.getCurrentYear(), this.getCurrentMonth(), dayCounter);
           const isToday = this.isEqualDates(fullDateOfDay, this.todayDate);
-          console.log(fullDateOfDay, this.todayDate);
           this.tableDates[row].push({
             date: fullDateOfDay,
             dayNumber: fullDateOfDay.getDate(),
@@ -210,12 +210,22 @@ export default {
 
       return false;
     },
+    selectDay(e, data) {
+      console.log(data);
+      this.setDateModal(data.date);
+      this.showModal();
+    },
   },
   ready() {
     this.setTodayDate();
     this.setCurrentMonth();
   },
-  vuex: {},
+  vuex: {
+    actions: {
+      showModal,
+      setDateModal,
+    },
+  },
 };
 
 </script>

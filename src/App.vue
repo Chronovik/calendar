@@ -6,19 +6,23 @@
     <main class="content">
       <calendar></calendar>
     </main>
+    <modal>dasdasdas</modal>
   </div>
 </template>
+
 
 <script>
 import HeadTop from './components/headTop.vue';
 import Search from './components/search.vue';
 import Calendar from './components/calendar.vue';
+import Modal from './components/modal.vue';
 
 export default {
   components: {
     HeadTop,
     Search,
     Calendar,
+    Modal,
   },
 };
 </script>
