@@ -2,8 +2,7 @@
   <header class="head">
     <div class="head__inner">
       <div class="head__buttons-wrap">
-        <button class="btn">Добавить</button>
-        <button class="btn">Обновить</button>
+        <button class="btn" @click="showModal">Добавить</button>
       </div>
       <div class="head__search-wrap">
         <slot></slot>
@@ -68,5 +67,13 @@
 </style>
 
 <script>
-export default {};
+import { showModal } from '../vuex/actions';
+
+export default {
+  vuex: {
+    actions: {
+      showModal,
+    },
+  },
+};
 </script>

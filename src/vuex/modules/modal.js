@@ -28,13 +28,10 @@ const mutations = {
     state.data.description = description;
   },
   DATA_TO_MODAL(subthree, data) {
-    console.log(data);
     state.data.eventName = data.eventName;
     state.data.names = data.names;
     state.data.description = data.description;
     state.data.date = data.date;
-
-    console.log(state.data);
   },
 };
 

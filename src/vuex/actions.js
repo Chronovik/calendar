@@ -14,8 +14,8 @@ export function setDescriptionModal({ dispatch }, description) {
   dispatch('SET_DESCRIPTION', description);
 };
 
-export function showModal({ dispatch }, data) {
-  dispatch('SHOW_MODAL', data);
+export function showModal({ dispatch }) {
+  dispatch('SHOW_MODAL');
 };
 
 export function hideModal({ dispatch }) {

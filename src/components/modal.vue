@@ -1,24 +1,39 @@
 <template>
   <div class="modal__wrap" v-if="isModalShow">
     <div class="modal">
-      <button class="btn btn_modal-close" @click="hideModal">x</button>
+      <button class="btn btn_modal-close" @click="close">x</button>
       <div class="modal__body">
-        <form :submit.prevent="onSubmit">
-          <div class="row">
-           <input type="text" required min-length="10" max-length="10" v-date-picker class="input" v-model="thisDate" placeholder="дата"/>
-          </div>
-          <div class="row">
-           <input type="text" required class="input" placeholder="Событие" v-model="thisEventName">
-          </div>
-          <div class="row">
-           <input type="text" required class="input" placeholder="Имена участников" v-model="thisNames">
-          </div>
-          <div class="row">
-           <textarea type="text" required class="input" placeholder="Описание" v-model="thisDescription"></textarea>
-          </div>
-          <button class="btn btn_small" type="submit" @click.prevent="onSubmit">Готово</button>
-          <button class="btn btn_small btn_red" type="button">Удалить</button>
-        </form>
+        <validator name="validationModal">
+          <form @submit.prevent="onSubmit($validationModal.valid)" novalidate>
+            <div class="row">
+              <input type="text" v-validate:date="{ required: true, date: true}"  v-date-picker class="input" v-model="thisDate" placeholder="дата"/>
+              <span class="validation" v-if="$validationModal.date.required">Поле обязательное к заполнению.</span>
+              <span class="validation" v-if="$validationModal.date.date">Форматы даты дд.мм.гггг.</span>
+            </div>
+            <div class="row">
+              <input type="text" v-validate:event="{ required: true, minlength: 4 }" class="input" placeholder="Событие" v-model="thisEventName">             
+              <span class="validation" v-if="$validationModal.event.required">Поле обязательное к заполнению.</span>
+              <span class="validation" v-if="$validationModal.event.minlength">Поле должно содержать минимуи 4 символа.</span>
+            </div>
+            <div class="row">
+              <input type="text" required class="input" placeholder="Имена участников" v-model="thisNames">
+            </div>
+            <div class="row">
+              <textarea 
+              type="text" 
+              v-validate:description="{ required: true, minlength: 4 }" 
+              class="input" 
+              placeholder="Описание" 
+              v-model="thisDescription"
+              ></textarea>
+
+              <span class="validation" v-if="$validationModal.description.required">Поле обязательное к заполнению.</span>
+              <span class="validation" v-if="$validationModal.description.minlength">Поле должно содержать минимуи 4 символа.</span>
+            </div>
+            <button class="btn btn_small" type="submit">Готово</button>
+            <button class="btn btn_small btn_red" type="button">Удалить</button>
+          </form>
+        </validator>
       </div>
     </div>
   </div>
@@ -70,6 +85,15 @@
   .row {
     margin-bottom: 16px;
   }
+
+  .validation {
+    display: block;
+    font-size: 12px;
+  } 
+
+  .invalid.touched ~ .validation {
+    color: red;
+  }
   
 </style>
 
@@ -95,6 +119,8 @@ export default {
   computed: {
     thisDate: {
       get() {
+        if (!this.getDateModal) return this.getDateModal;
+
         const year = this.getDateModal.getFullYear();
         let month = this.getDateModal.getMonth();
         let day = this.getDateModal.getDate();
@@ -138,19 +164,25 @@ export default {
   },
   methods: {
     clear() {
-      this.thisDate = '';
-      this.thisEventName = '';
-      this.thisNames = '';
-      this.thisDescription = '';
+      this.setDateModal('');
+      this.setEventModal('');
+      this.setNamesModal('');
+      this.setDescriptionModal('');
     },
-    onSubmit() {
-      this.addEvent({
-        date: this.thisDate,
-        name: this.thisEventName,
-        names: this.thisNames,
-        description: this.thisDescription,
-      });
+    onSubmit(isValid) {
+      if (isValid) {
+        this.addEvent({
+          date: this.getDateModal,
+          name: this.thisEventName,
+          names: this.thisNames,
+          description: this.thisDescription,
+        });
 
+        this.hideModal();
+        this.clear();
+      }
+    },
+    close() {
       this.hideModal();
       this.clear();
     },

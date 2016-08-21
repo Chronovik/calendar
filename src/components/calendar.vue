@@ -108,7 +108,14 @@
 </style>
 
 <script>
-import { showModal, setDateModal } from '../vuex/actions';
+import {
+  showModal,
+  setDateModal,
+  setEventModal,
+  setNamesModal,
+  setDescriptionModal } from '../vuex/actions';
+import { events } from '../vuex/getters';
+import fn from '../functions';
 
 export default {
   data() {
@@ -211,9 +218,22 @@ export default {
       return false;
     },
     selectDay(e, data) {
-      console.log(data);
       this.setDateModal(data.date);
+      const eventData = this.getDayEvent(data.date);
+      if (eventData) {
+        this.fillForm(eventData);
+      }
       this.showModal();
+    },
+    getDayEvent(date) {
+      const dateString = fn.convertDateObjToString(date);
+      return fn.findEventByDateString(dateString, this.events);
+    },
+    fillForm(data) {
+      this.setDateModal(data.date);
+      this.setEventModal(data.name);
+      this.setNamesModal(data.names);
+      this.setDescriptionModal(data.description);
     },
   },
   ready() {
@@ -224,6 +244,12 @@ export default {
     actions: {
       showModal,
       setDateModal,
+      setEventModal,
+      setNamesModal,
+      setDescriptionModal,
+    },
+    getters: {
+      events,
     },
   },
 };
