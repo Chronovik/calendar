@@ -5,3 +5,5 @@ export const getDateModal = state => state.modal.data.date;
 export const getEventModal = state => state.modal.data.eventName;
 export const getNamesModal = state => state.modal.data.names;
 export const getDescriptionModal = state => state.modal.data.description;
+export const getFound = state => state.search.found;
+export const getSearchText = state => state.search.searchText;

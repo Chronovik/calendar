@@ -188,7 +188,8 @@ export default {
       for (let row = 0; row <= 4; row++) {
         this.tableDates.push([]);
         for (let col = 0; col <= 6; col++, dayCounter++) {
-          const fullDateOfDay = new Date(this.getCurrentYear(), this.getCurrentMonth(), dayCounter);
+          const fullDateOfDay = new Date(this.getCurrentYear(), this.getCurrentMonth(),
+          dayCounter);
           const isToday = this.isEqualDates(fullDateOfDay, this.todayDate);
           this.tableDates[row].push({
             date: fullDateOfDay,

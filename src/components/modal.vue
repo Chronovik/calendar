@@ -30,8 +30,8 @@
               <span class="validation" v-if="$validationModal.description.required">Поле обязательное к заполнению.</span>
               <span class="validation" v-if="$validationModal.description.minlength">Поле должно содержать минимуи 4 символа.</span>
             </div>
-            <button class="btn btn_small" type="submit">Готово</button>
-            <button class="btn btn_small btn_red" type="button">Удалить</button>
+            <button class="btn btn_small" type="submit">Сохранить</button>
+            <button class="btn btn_small btn_red" type="button" @click="deleteEvent(thisDate)">Удалить</button>
           </form>
         </validator>
       </div>
@@ -98,6 +98,7 @@
 </style>
 
 <script>
+// import fn from '../functions';
 import {
   showModal,
   hideModal,
@@ -105,8 +106,8 @@ import {
   setEventModal,
   setNamesModal,
   setDescriptionModal,
-  addEvent } from '../vuex/actions';
-
+  addEvent,
+  removeEventByDate } from '../vuex/actions';
 import {
   isModalShow,
   getModalData,
@@ -122,7 +123,7 @@ export default {
         if (!this.getDateModal) return this.getDateModal;
 
         const year = this.getDateModal.getFullYear();
-        let month = this.getDateModal.getMonth();
+        let month = this.getDateModal.getMonth() + 1;
         let day = this.getDateModal.getDate();
 
         day = (day < 9) ? `0${day}` : day;
@@ -182,6 +183,11 @@ export default {
         this.clear();
       }
     },
+    deleteEvent(date) {
+      this.hideModal();
+      this.removeEventByDate(date);
+      this.clear();
+    },
     close() {
       this.hideModal();
       this.clear();
@@ -204,6 +210,7 @@ export default {
       setNamesModal,
       setDescriptionModal,
       addEvent,
+      removeEventByDate,
     },
   },
 };

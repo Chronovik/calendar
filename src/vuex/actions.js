@@ -25,3 +25,15 @@ export function hideModal({ dispatch }) {
 export function addEvent({ dispatch }, event) {
   dispatch('ADD_EVENT', event);
 };
+
+export function removeEventByDate({ dispatch }, date) {
+  dispatch('REMOVE_EVENT', date);
+};
+
+export function setFound({ dispatch }, foundArr) {
+  dispatch('SET_FOUND', foundArr);
+};
+
+export function setSearchText({ dispatch }, searchText) {
+  dispatch('SET_SEARCH_TEXT', searchText);
+};

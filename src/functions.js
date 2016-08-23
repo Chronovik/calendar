@@ -28,8 +28,20 @@ export default {
       }
       currentRoot = currentRoot[explodePath[i]];
     }
-    console.log(currentRoot);
 
     return currentRoot;
+  },
+  cleanCurrentEventObj(eventObj, pathArr) {
+    const dateArr = pathArr;
+    let counter = (dateArr.length - 1);
+    console.log((dateArr));
+    if (Object.keys(dateArr[counter]) &&
+    dateArr.length > 0) {
+      // delete dateArr[counter--];
+      // this.cleanCurrentEventObj(eventObj, dateArr);
+      counter--;
+    } else {
+      console.log('end');
+    }
   },
 };
