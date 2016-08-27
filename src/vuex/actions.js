@@ -2,6 +2,10 @@ export function setDateModal({ dispatch }, date) {
   dispatch('SET_DATE', date);
 };
 
+export function setDateStringModal({ dispatch }, dateString) {
+  dispatch('SET_DATE_STRING', dateString);
+};
+
 export function setEventModal({ dispatch }, event) {
   dispatch('SET_EVENT', event);
 };

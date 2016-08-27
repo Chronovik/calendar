@@ -13,6 +13,18 @@ export default {
     }
     return obj;
   },
+  convertDateObjToStringModal(date, fixMonth) {
+    const year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDate();
+
+    month = fixMonth ? month + 1 : month;
+
+    day = (day <= 9) ? `0${day}` : day;
+    month = (month <= 9) ? `0${month}` : month;
+
+    return `${day}.${month}.${year}`;
+  },
   convertDateObjToString(date) {
     return `y${date.getFullYear()}_m${date.getMonth()}_d${date.getDate()}`;
   },

@@ -1,6 +1,7 @@
 const state = {
   show: false,
   data: {
+    dateString: null,
     date: null,
     eventName: '',
     names: '',
@@ -17,6 +18,9 @@ const mutations = {
   },
   SET_DATE(subthree, date) {
     state.data.date = date;
+  },
+  SET_DATE_STRING(subthree, dateString) {
+    state.data.dateString = dateString;
   },
   SET_EVENT(subthree, eventName) {
     state.data.eventName = eventName;

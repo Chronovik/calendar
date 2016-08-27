@@ -110,19 +110,21 @@ export default {
       this.findEvents(this.events, this.thisSearch);
     },
     findEvents(eventsObj, text) {
-      const parentEventObj = eventsObj;
-      const keys = Object.keys(parentEventObj);
+      if (eventsObj) {
+        const parentEventObj = eventsObj;
+        const keys = Object.keys(parentEventObj);
 
-      for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        if (typeof parentEventObj[key] === 'object') {
-          this.findEvents(parentEventObj[key], text);
-        } else if (parentEventObj[key].indexOf(text) >= 0 && text.length >= 3) {
-          console.log(parentEventObj);
-          this.suggestItems.push({
-            event: parentEventObj,
-            matchString: parentEventObj[key],
-          });
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+          if (typeof parentEventObj[key] === 'object') {
+            this.findEvents(parentEventObj[key], text);
+          } else if (parentEventObj[key].indexOf(text) >= 0 && text.length >= 3) {
+            console.log(parentEventObj);
+            this.suggestItems.push({
+              event: parentEventObj,
+              matchString: parentEventObj[key],
+            });
+          }
         }
       }
     },
