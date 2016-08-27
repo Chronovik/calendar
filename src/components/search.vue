@@ -6,7 +6,7 @@
     <div v-show="suggestItems.length" class="search__suggest">
       <ul class="list">
         <li class="list__item" v-for="item in suggestItems">
-          <div class="search__suggest-item" @click="showModal">{{ item.matchString }}</div>
+          <div class="search__suggest-item" @click="showDay(item.event)">{{ item.matchString }}</div>
         </li>
       </ul>
     </div>
@@ -127,6 +127,21 @@ export default {
           }
         }
       }
+    },
+    fillForm(data) {
+      this.setDateModal(data.date);
+      this.setEventModal(data.name);
+      this.setNamesModal(data.names);
+      this.setDescriptionModal(data.description);
+    },
+    showDay(event) {
+      console.log(event);
+      console.log(event.dateString);
+      console.log(event.name);
+      console.log(event.names);
+      console.log(event.description);
+      this.fillForm(event);
+      this.showModal();
     },
   },
   vuex: {

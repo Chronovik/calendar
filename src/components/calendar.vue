@@ -219,9 +219,7 @@ export default {
       return false;
     },
     selectDay(e, data) {
-      console.log(fn.convertDateObjToStringModal(data.date));
       this.setDateModal(data.date);
-      // this.getDateStringModal(data.date);
       const eventData = this.getDayEvent(data.date);
       if (eventData) {
         this.fillForm(eventData);
