@@ -11,10 +11,15 @@ require('air-datepicker/dist/css/datepicker.css');
 Vue.use(VueValidator);
 
 /* eslint-disable no-new */
-new Vue({
+const root = new Vue({
   el: 'body',
   store,
   components: { App },
+  events: {
+    'change-event': () => {
+      root.$broadcast('refresh-table');
+    },
+  },
 });
 
 Vue.validator('date', function (val) {

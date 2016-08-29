@@ -181,6 +181,7 @@ export default {
 
         this.hideModal();
         this.clear();
+        this.$dispatch('change-event');
       }
     },
     deleteEvent(date) {

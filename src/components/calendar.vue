@@ -20,9 +20,9 @@
       </thead>
       <tbody>
         <tr v-for="week in tableDates">
-          <td v-for="day in week" :class="{ 'calendar__table-today': day.today}"  @click="selectDay(e, day)">
+          <td v-for="day in week" :class="{ 'calendar__table-today': day.today,  'calendar__table-event': day.haveEvent}"  @click="selectDay(e, day)">
             <div class="calendar__table-date">{{ day.dayNumber }}</div>    
-            <div class="calendar__table-note"></div>      
+            <div class="calendar__table-note">{{ day.description }}</div>      
           </td> 
         </tr>     
       </tbody>
@@ -104,7 +104,11 @@
 }
 
 .calendar__table-today {
-  background: rgba(103, 128, 159, .2);
+  background: rgba(103, 128, 159, .1);
+}
+
+.calendar__table-event {
+  background: rgba(103, 128, 159, .4);
 }
 </style>
 
@@ -118,7 +122,7 @@ import {
 import { events } from '../vuex/getters';
 import fn from '../functions';
 
-export default {
+const calendar = {
   data() {
     return {
       currentDate: null,
@@ -192,13 +196,15 @@ export default {
           const fullDateOfDay = new Date(this.getCurrentYear(), this.getCurrentMonth(),
           dayCounter);
           const dayStringDate = fn.convertDateObjToString(fullDateOfDay);
-          console.log(this.events[dayStringDate]);
-
+          const event = this.events[dayStringDate];
           const isToday = this.isEqualDates(fullDateOfDay, this.todayDate);
+
           this.tableDates[row].push({
             date: fullDateOfDay,
             dayNumber: fullDateOfDay.getDate(),
             today: isToday,
+            haveEvent: !!event,
+            description: event && event.description,
           });
         }
       }
@@ -244,6 +250,12 @@ export default {
   ready() {
     this.setTodayDate();
     this.setCurrentMonth();
+    console.log(this);
+  },
+  events: {
+    'refresh-table': function ss() {
+      this.generateTable();
+    },
   },
   vuex: {
     actions: {
@@ -258,5 +270,7 @@ export default {
     },
   },
 };
+
+export default calendar;
 
 </script>
