@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <form action="#">
-      <button class="btn">Go</button><input @keyup="search" v-model="thisSearch" type="text" class="search__input" placeholder="Событие, дата или участник">
+      <input @keyup="search" v-model="thisSearch" type="text" class="search__input" placeholder="Событие, дата или участник">
     </form>
     <div v-show="suggestItems.length" class="search__suggest">
       <ul class="list">
@@ -17,7 +17,7 @@
 .search__input {
   padding: 6px 12px;
   border: 1px solid #4183D7;
-  border-radius: 0 3px 3px 0;
+  border-radius: 3px;
   outline: 0;
   transition: border-color .3s;
   width: 204px;
@@ -119,7 +119,6 @@ export default {
           if (typeof parentEventObj[key] === 'object') {
             this.findEvents(parentEventObj[key], text);
           } else if (parentEventObj[key].indexOf(text) >= 0 && text.length >= 3) {
-            console.log(parentEventObj);
             this.suggestItems.push({
               event: parentEventObj,
               matchString: parentEventObj[key],
@@ -136,12 +135,11 @@ export default {
     },
     showDay(event) {
       console.log(event);
-      console.log(event.dateString);
-      console.log(event.name);
-      console.log(event.names);
-      console.log(event.description);
       this.fillForm(event);
       this.showModal();
+    },
+    hideSuggest() {
+      this.suggestItems = [];
     },
   },
   vuex: {

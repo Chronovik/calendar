@@ -22,7 +22,7 @@
         <tr v-for="week in tableDates">
           <td v-for="day in week" :class="{ 'calendar__table-today': day.today}"  @click="selectDay(e, day)">
             <div class="calendar__table-date">{{ day.dayNumber }}</div>    
-            <div class="calendar__table-note">Обосраться на паре</div>      
+            <div class="calendar__table-note"></div>      
           </td> 
         </tr>     
       </tbody>
@@ -53,6 +53,7 @@
   border: 1px solid #fff;
   border-top: 1px solid #4B77BE;
   padding: 12px;
+  width: 14.28%;
 }
 
 .calendar__table thead td:first-child {
@@ -190,6 +191,9 @@ export default {
         for (let col = 0; col <= 6; col++, dayCounter++) {
           const fullDateOfDay = new Date(this.getCurrentYear(), this.getCurrentMonth(),
           dayCounter);
+          const dayStringDate = fn.convertDateObjToString(fullDateOfDay);
+          console.log(this.events[dayStringDate]);
+
           const isToday = this.isEqualDates(fullDateOfDay, this.todayDate);
           this.tableDates[row].push({
             date: fullDateOfDay,
@@ -228,7 +232,7 @@ export default {
     },
     getDayEvent(date) {
       const dateString = fn.convertDateObjToString(date);
-      return fn.findEventByDateString(dateString, this.events);
+      return this.events[dateString];
     },
     fillForm(data) {
       this.setDateModal(data.date);

@@ -31,7 +31,7 @@
               <span class="validation" v-if="$validationModal.description.minlength">Поле должно содержать минимуи 4 символа.</span>
             </div>
             <button class="btn btn_small" type="submit">Сохранить</button>
-            <button class="btn btn_small btn_red" type="button" @click="deleteEvent(thisDate)">Удалить</button>
+            <button class="btn btn_small btn_red" type="button" @click="deleteEvent(getDateModal)">Удалить</button>
           </form>
         </validator>
       </div>
@@ -171,13 +171,6 @@ export default {
     },
     onSubmit(isValid) {
       if (isValid) {
-        console.log({
-          date: this.getDateModal,
-          dateString: this.getDateStringModal,
-          name: this.thisEventName,
-          names: this.thisNames,
-          description: this.thisDescription,
-        });
         this.addEvent({
           date: this.getDateModal,
           dateString: this.getDateStringModal,
