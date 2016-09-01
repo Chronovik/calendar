@@ -1,3 +1,7 @@
+export function setEvents({ dispatch }, events) {
+  dispatch('SET_EVENTS', events);
+};
+
 export function setDateModal({ dispatch }, date) {
   dispatch('SET_DATE', date);
 };

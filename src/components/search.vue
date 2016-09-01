@@ -134,7 +134,7 @@ export default {
       this.setDescriptionModal(data.description);
     },
     showDay(event) {
-      console.log(event);
+      this.hideSuggest();
       this.fillForm(event);
       this.showModal();
     },

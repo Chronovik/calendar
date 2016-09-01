@@ -17,12 +17,40 @@ import Search from './components/search.vue';
 import Calendar from './components/calendar.vue';
 import Modal from './components/modal.vue';
 
+import { events } from './vuex/getters';
+import { addEvent } from './vuex/actions';
+
 export default {
+  methods: {
+    getEventsFromStore() {
+      const storageEvents = Object.keys(localStorage);
+      let event;
+      if (storageEvents) {
+        storageEvents.forEach((item) => {
+          event = JSON.parse(localStorage[item]);
+          event.date = new Date(event.date);
+          this.addEvent(event);
+        });
+        this.$broadcast('refresh-table');
+      }
+    },
+  },
+  ready() {
+    this.getEventsFromStore();
+  },
   components: {
     HeadTop,
     Search,
     Calendar,
     Modal,
+  },
+  vuex: {
+    getters: {
+      events,
+    },
+    actions: {
+      addEvent,
+    },
   },
 };
 </script>

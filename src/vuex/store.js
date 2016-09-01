@@ -14,12 +14,15 @@ const state = {
 
 const mutations = {
   ADD_EVENT(state, event) {
+    console.log(event);
     var stringDate = fn.convertDateObjToString(event.date);
     state.events[stringDate] = event;
+    localStorage.setItem(stringDate, JSON.stringify(event));
   },
   REMOVE_EVENT(state, eventDate) {
     var stringDate = fn.convertDateObjToString(eventDate);
-    delete state.events[stringDate];
+    Vue.delete(state.events, stringDate);
+    localStorage.removeItem(stringDate);
   },
 };
 

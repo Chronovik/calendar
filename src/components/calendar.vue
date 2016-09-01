@@ -146,7 +146,6 @@ const calendar = {
       ],
     };
   },
-  computed: {},
   methods: {
     setCurrentMonth(date) {
       const tempDate = new Date();
@@ -250,10 +249,9 @@ const calendar = {
   ready() {
     this.setTodayDate();
     this.setCurrentMonth();
-    console.log(this);
   },
   events: {
-    'refresh-table': function ss() {
+    'refresh-table': function refreshTable() {
       this.generateTable();
     },
   },
